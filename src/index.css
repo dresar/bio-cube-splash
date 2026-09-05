@@ -1,0 +1,239 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Bio Link Design System - Modern 3D animated theme */
+
+@layer base {
+  :root {
+    /* Light mode colors */
+    --background: 220 15% 97%;
+    --foreground: 220 20% 15%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+    
+    --primary: 265 85% 58%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 270 100% 85%;
+    
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 220 20% 15%;
+    
+    --muted: 210 40% 95%;
+    --muted-foreground: 220 10% 50%;
+    
+    --accent: 315 70% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 265 85% 58%;
+    
+    --radius: 1rem;
+    
+    /* Bio link specific colors */
+    --bio-bg-start: 220 25% 95%;
+    --bio-bg-end: 270 25% 98%;
+    --glass-bg: 0 0% 100%;
+    --glass-border: 220 15% 85%;
+    --shadow-color: 265 85% 58%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-bg: linear-gradient(135deg, hsl(var(--bio-bg-start)), hsl(var(--bio-bg-end)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--glass-bg) / 0.8), hsl(var(--glass-bg) / 0.4));
+    
+    /* 3D Shadows */
+    --shadow-3d: 0 10px 30px -5px hsl(var(--shadow-color) / 0.3);
+    --shadow-hover: 0 20px 40px -5px hsl(var(--shadow-color) / 0.4);
+    --shadow-glow: 0 0 30px hsl(var(--primary-glow) / 0.6);
+    
+    /* Animations */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Dark mode colors */
+    --background: 220 25% 8%;
+    --foreground: 220 15% 95%;
+    
+    --card: 220 20% 12%;
+    --card-foreground: 220 15% 95%;
+    
+    --popover: 220 20% 12%;
+    --popover-foreground: 220 15% 95%;
+    
+    --primary: 270 85% 65%;
+    --primary-foreground: 220 25% 8%;
+    --primary-glow: 270 100% 80%;
+    
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 220 15% 95%;
+    
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 65%;
+    
+    --accent: 315 70% 65%;
+    --accent-foreground: 220 25% 8%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 15% 95%;
+    
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 270 85% 65%;
+    
+    /* Dark mode bio colors */
+    --bio-bg-start: 220 25% 6%;
+    --bio-bg-end: 270 25% 10%;
+    --glass-bg: 220 20% 15%;
+    --glass-border: 220 15% 25%;
+    --shadow-color: 270 85% 65%;
+    
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-bg: linear-gradient(135deg, hsl(var(--bio-bg-start)), hsl(var(--bio-bg-end)));
+    --gradient-card: linear-gradient(145deg, hsl(var(--glass-bg) / 0.8), hsl(var(--glass-bg) / 0.4));
+    
+    /* Dark mode 3D shadows */
+    --shadow-3d: 0 10px 30px -5px hsl(var(--shadow-color) / 0.4);
+    --shadow-hover: 0 20px 40px -5px hsl(var(--shadow-color) / 0.5);
+    --shadow-glow: 0 0 30px hsl(var(--primary-glow) / 0.8);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-bg);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* 3D Card Animation */
+  .card-3d {
+    @apply relative overflow-hidden;
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+    box-shadow: var(--shadow-3d);
+    transition: var(--transition-smooth);
+  }
+  
+  .card-3d::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: var(--gradient-primary);
+    z-index: -1;
+  }
+  
+  .card-3d:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .card-3d:hover::before {
+    @apply opacity-10;
+  }
+  
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(1deg); }
+    50% { transform: translateY(-5px) rotate(0deg); }
+    75% { transform: translateY(-15px) rotate(-1deg); }
+  }
+  
+  /* Bio Link Button */
+  .bio-link {
+    @apply relative overflow-hidden rounded-2xl p-4 text-center font-medium transition-all duration-300;
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+    box-shadow: var(--shadow-3d);
+  }
+  
+  .bio-link::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: var(--gradient-primary);
+    z-index: -1;
+  }
+  
+  .bio-link:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+  
+  .bio-link:hover::before {
+    @apply opacity-100;
+  }
+  
+  .bio-link:hover * {
+    @apply text-white;
+  }
+  
+  /* Social Icon */
+  .social-icon {
+    @apply relative overflow-hidden rounded-full p-3 transition-all duration-300;
+    background: var(--gradient-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+    box-shadow: var(--shadow-3d);
+  }
+  
+  .social-icon:hover {
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: var(--shadow-hover);
+    background: var(--gradient-primary);
+  }
+  
+  .social-icon:hover * {
+    @apply text-white;
+  }
+  
+  /* Profile Image Glow */
+  .profile-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Stagger Animation */
+  .stagger-item {
+    animation: staggerIn 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-item:nth-child(6) { animation-delay: 0.6s; }
+  .stagger-item:nth-child(7) { animation-delay: 0.7s; }
+  .stagger-item:nth-child(8) { animation-delay: 0.8s; }
+  
+  @keyframes staggerIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
